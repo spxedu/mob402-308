@@ -1,0 +1,13 @@
+<%- include('../inc/top') %>
+<div class="row">
+    <h2>Thêm sản phẩm</h2>
+
+    <form action="" method="post" enctype="multipart/form-data">
+        <input type="file" name="anh" /> 
+        <button type="submit"> Upload </button>
+    </form> 
+
+    <%= url_image %>
+    <img src="<%= url_image %>" />
+</div>
+<%- include('../inc/bottom') %>

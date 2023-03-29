@@ -1,9 +1,12 @@
 const fs = require('fs');
+const myModel = require('../models/sanpham.model');  // nhúng thư viện Model
 
-exports.list = (req,res, next)=>{
+exports.list = async (req,res, next)=>{
     // hiển thị danh sách sản phẩm
 
-    res.render('sanpham/list');
+    var list = await myModel.spModel.find().sort( { name: 1 });// tìm sp
+
+    res.render('sanpham/list', { listSp: list }); // truyền DS ra view
 }
 
 exports.add = async (req, res, next)=>{

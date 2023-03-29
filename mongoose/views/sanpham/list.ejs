@@ -1,0 +1,20 @@
+<%- include('../inc/top') %>
+
+<div class="row">
+    <h2>Danh sách sản phẩm</h2>
+
+    <ul>
+    <% listSp.forEach(  ( row ) => {   %>
+        
+            <li>  
+                Tên SP: <%= row.name %> 
+                Giá : <%= row.price %> 
+                Mô tả: <%= row.description %> 
+            </li> 
+
+      <%   });     %>
+     </ul>
+
+
+</div>
+<%- include('../inc/bottom') %>
