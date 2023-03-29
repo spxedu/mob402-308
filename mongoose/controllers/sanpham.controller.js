@@ -49,3 +49,31 @@ exports.add = async (req, res, next)=>{
 }
 
  
+
+exports.addSP = async (req, res, next)=>{
+    let msg = ''; // ghi câu thông báo
+    if(req.method =='POST'){
+        // xử lý ghi CSDL ở đây
+        // kiểm tra hợp lệ dữ liệu ở chỗ này.
+
+
+        // tạo đối tượng model 
+        let objSP = new myModel.spModel();
+        objSP.name = req.body.name;
+        objSP.price = req.body.price;
+        
+        try{
+            let new_sp = await objSP.save();
+            
+            console.log(new_sp);
+
+            console.log("Đã ghi thành công");
+            msg = 'Đã thêm thành công';
+        }catch(err){
+            console.log(err);
+        }
+ 
+    }
+
+    res.render('sanpham/add-sp', {msg:msg});
+}
