@@ -71,6 +71,8 @@ exports.addSP = async (req, res, next)=>{
             msg = 'Đã thêm thành công';
         }catch(err){
             console.log(err);
+            msg ='Lỗi '+ error.message;
+
         }
  
     }
