@@ -6,6 +6,16 @@
 
 
     <form action="" method="post" >
+
+        <select name="theloai" >
+            <% listTheloai.forEach( (objTL)=>{ %>
+                
+                <option value="<%= objTL._id %>"> <%= objTL.name %>  </option>
+
+            <%   } ) %>
+        </select>
+
+
          
         <input type="text" name="name" placeholder="Tên SP" />
         <input type="number" name="price" placeholder="Giá" />

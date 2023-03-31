@@ -57,6 +57,10 @@ exports.add = async (req, res, next)=>{
 
 exports.addSP = async (req, res, next)=>{
     let msg = ''; // ghi câu thông báo
+
+    // lấy danh sách thể loại đưa lên form
+    let listTheloai = await myModel.theLoaiModel.find();
+
     if(req.method =='POST'){
         // xử lý ghi CSDL ở đây
         // kiểm tra hợp lệ dữ liệu ở chỗ này.
@@ -66,6 +70,7 @@ exports.addSP = async (req, res, next)=>{
         let objSP = new myModel.spModel();
         objSP.name = req.body.name;
         objSP.price = req.body.price;
+        objSP.id_theloai = req.body.theloai;// thêm dòng này để có thể loại
         
         try{
             let new_sp = await objSP.save();
@@ -82,5 +87,5 @@ exports.addSP = async (req, res, next)=>{
  
     }
 
-    res.render('sanpham/add-sp', {msg:msg});
+    res.render('sanpham/add-sp', {msg:msg,  listTheloai:listTheloai});
 }
