@@ -14,7 +14,12 @@ exports.list = async (req,res, next)=>{
         dieu_kien = { price: price };
     }
 
-    var list = await myModel.spModel.find(  dieu_kien   ).sort( { name: 1 });// tìm sp
+    // var list = await myModel.spModel.find(  dieu_kien   ).sort( { name: 1 });// tìm sp
+    // cải tiến lệnh lấy ds: lấy thêm thể loại
+    var list = await myModel.spModel.find(  dieu_kien   )
+                    .populate('id_theloai') // tên cột tham chiếu
+                    ;// tìm sp
+    console.log(list);
 
     res.render('sanpham/list', { listSp: list }); // truyền DS ra view
 }

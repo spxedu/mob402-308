@@ -3,18 +3,27 @@
 <div class="row">
     <h2>Danh sách sản phẩm</h2>
 
-    <ul>
-    <% listSp.forEach(  ( row ) => {   %>
-        
-            <li> 
-                ID SP : <%= row._id %> /
-                Tên SP: <%= row.name %> /
-                Giá : <%= row.price %> / 
-                Mô tả: <%= row.description %> 
-            </li> 
+    <table class="table table-bordered table-striped">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Desc</th>
+            <th>Thẻ loại</th>
+        </tr>
+        <% listSp.forEach(  ( row ) => {   %>
+            <tr>
+                <td>  <%= row._id %> </td>
+                <td>  <%= row.name %> </td>
+                <td>  <%= row.price %></td>
+                <td> <%= row.description %></td>
+                <td> <%= row.id_theloai.name %> </td>
+            </tr> 
+         <%   });     %>
+    </table>
 
-      <%   });     %>
-     </ul>
+ 
+
 
 
 </div>
