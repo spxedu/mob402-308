@@ -16,8 +16,9 @@ router.post('/add', uploader.single('anh'),  spCtrl.add);
 router.get('/add-sp', spCtrl.addSP);
 router.post('/add-sp', spCtrl.addSP);
 
+// chức năng sửa <a href="/sp/edit/xxxxxxxx">  <%= row._id %>    </a>
 
-
-
+router.get('/edit/:idsp', spCtrl.editSP);
+router.post('/edit/:idsp', spCtrl.editSP);
 
 module.exports = router;

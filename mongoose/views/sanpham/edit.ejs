@@ -1,0 +1,36 @@
+<%- include('../inc/top') %>
+<div class="row">
+    <h2>Sửa sản phẩm </h2>
+
+    <%= msg  %>
+
+
+    <form action="" method="post" >
+
+        <select name="theloai" >
+            <% listTheloai.forEach( (objTL)=>{ 
+                let selected = '';// xác định thể loại đã chọn của sp
+                if(String( objTL._id ) == String(objSP.id_theloai) ){
+                    selected = '  selected ';
+                }
+                %>
+                
+                <option  <%= selected %> 
+                    value="<%= objTL._id %>"> <%= objTL.name %>  </option>
+
+            <%   } ) %>
+        </select>
+
+
+         
+        <input type="text" name="name" placeholder="Tên SP"
+                 value="<%= objSP.name %>" />
+        <input type="number" name="price" placeholder="Giá"
+                value="<%= objSP.price %>" />
+
+        <button type="submit"> Save </button>
+    </form> 
+
+    
+</div>
+<%- include('../inc/bottom') %>

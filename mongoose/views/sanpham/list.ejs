@@ -13,7 +13,12 @@
         </tr>
         <% listSp.forEach(  ( row ) => {   %>
             <tr>
-                <td>  <%= row._id %> </td>
+                <td> 
+                    <a href="/sp/edit/<%= row._id %>">  <%= row._id %>    </a>
+                   
+                 
+                </td>
+
                 <td>  <%= row.name %> </td>
                 <td>  <%= row.price %></td>
                 <td> <%= row.description %></td>

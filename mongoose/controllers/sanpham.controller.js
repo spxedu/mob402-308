@@ -89,3 +89,44 @@ exports.addSP = async (req, res, next)=>{
 
     res.render('sanpham/add-sp', {msg:msg,  listTheloai:listTheloai});
 }
+
+
+exports.editSP = async (req,res,next)=>{
+    let msg = ''; // chứa câu thông báo
+    // load dữ liệu cũ để hiển thị
+    let objSP = await myModel.spModel.findById(  req.params.idsp  );
+    console.log( objSP);
+
+    // lấy danh sách thể loại đưa lên form
+    let listTheloai = await myModel.theLoaiModel.find();
+    if(req.method =='POST'){
+        // xử lý ghi CSDL ở đây
+        // kiểm tra hợp lệ dữ liệu ở chỗ này.
+
+
+        // tạo đối tượng model 
+        let objSP = new myModel.spModel();
+        objSP.name = req.body.name;
+        objSP.price = req.body.price;
+        objSP.id_theloai = req.body.theloai;// thêm dòng này để có thể loại
+        objSP._id = req.params.idsp;
+        try{
+             
+            // update dữ liệu
+            // await myModel.spModel.updateOne( {_id:  req.params.idsp},   objSP );
+             await myModel.spModel.findByIdAndUpdate({_id:  req.params.idsp},objSP);
+
+            console.log("Đã ghi thành công");
+            msg = 'Đã ghi thành công';
+        }catch(err){
+            console.log(err);
+            msg ='Lỗi '+ err.message;
+
+        }
+ 
+    }
+
+    res.render('sanpham/edit', 
+            {msg:msg, objSP: objSP, listTheloai:listTheloai})
+
+}
