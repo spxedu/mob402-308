@@ -27,8 +27,37 @@ let msg = '';
 res.render('user/reg',{msg: msg});
 
 }
-exports.Login = (req, res, next)=>{
-    
+exports.Login = async (req, res, next)=>{
+    let msg = '';
+    if(req.method =='POST'){
+        // console.log(req.body);
+        try {
+            let objU = await myMD.UserModel.findOne({username: req.body.username});
+
+            console.log(objU);
+
+            if(objU != null){
+                // lấy được thông tin tài khoản ==> kiểm tra pass
+                if(objU.passwd == req.body.passwd){
+                    // Đúng thông tin tài khoản ==> đăng nhập thành công 
+                    // lưu thông tin vào session
+                    req.session.userLogin = objU; 
+                    // tự chuyển về trang chủ hoặc trang nào đó
+                    return res.redirect('/users');
+                }else{
+                    msg = 'Sai password';
+                }
+            }else{
+                msg = 'Không tồn tại tài khoản';
+            }
+
+        } catch (error) {
+            msg = 'Lỗi ' + error.message;
+        }
+
+    }
+
+    res.render('user/login', {msg: msg});
 }
 exports.Logout = (req, res, next)=>{
     

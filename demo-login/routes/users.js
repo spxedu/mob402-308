@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var userCtrl = require('../controllers/user.controller');
+var check_login = require('../middleware/check_login');
 
 // dùng middlware cho toàn bộ các router ở trong file thì viết ở trên đầu file
 router.use( (req,res,next)=>{
@@ -10,10 +11,13 @@ router.use( (req,res,next)=>{
 
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
+router.get('/',check_login.yeu_cau_dang_nhap, function(req, res, next) {
   // danh sách user
   console.log('Hiển thị danh sách user');
-  res.send('respond with a resource');
+
+  // hiển thị user đã login 
+  console.log(req.session.userLogin);
+  res.send( req.session.userLogin);
 });
 
 router.get('/add',  (req,res,next)=>{
@@ -22,11 +26,11 @@ router.get('/add',  (req,res,next)=>{
 })
 
 
-router.get('/reg', userCtrl.Reg);
-router.post('/reg', userCtrl.Reg);
+router.get('/reg', check_login.khong_yc_dang_nhap, userCtrl.Reg);
+router.post('/reg', check_login.khong_yc_dang_nhap, userCtrl.Reg);
 
-router.get('/login', userCtrl.Login);
-router.post('/login', userCtrl.Login);
+router.get('/login', check_login.khong_yc_dang_nhap, userCtrl.Login);
+router.post('/login', check_login.khong_yc_dang_nhap , userCtrl.Login);
 
 router.get('/logout', userCtrl.Logout);
 
